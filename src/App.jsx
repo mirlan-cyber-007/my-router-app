@@ -7,6 +7,7 @@ import Contact from './Contact';
 import ContactDetail from './ContactDetail';
 import './App.css';
 import logo from '/images/logo.jpeg';
+import AppRoutes from './AppRoutes';
 
 
 function App() {
@@ -46,15 +47,7 @@ function App() {
         </div>
       </nav>
 
-      <div className="page-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/contact/:name" element={<ContactDetail />} />
-        </Routes>
-      </div>
+      <AppRoutes />
     </div>
   );
 }
