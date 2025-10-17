@@ -1,0 +1,97 @@
+/* Базовый стиль навбара */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #4e54c8;
+  padding: 10px 20px;
+  color: white;
+  position: relative;
+}
+
+.nav-logo {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+/* Иконка гамбургера */
+.hamburger {
+  display: none; /* по умолчанию скрыта */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hamburger .bar {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Анимация при открытом меню */
+.hamburger.open .bar:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Меню ссылок */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-btn {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex; /* показываем гамбургер */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background-color: #4e54c8;
+    flex-direction: column;
+    width: 200px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    border-radius: 0 0 0 10px;
+  }
+
+  .nav-links.active {
+    transform: translateX(0);
+  }
+
+  .nav-btn {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-btn:last-child {
+    border-bottom: none;
+  }
+}
