@@ -1,0 +1,76 @@
+.admin-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+.admin-form {
+    width: 320px;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-input {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.admin-btn {
+    padding: 10px 12px;
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.admin-error {
+    color: #b00020;
+    background: #ffecec;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.admin-form h2 {
+    margin: 0 0 6px 0;
+    text-align: center;
+}
+
+.admin-add-form {
+    max-width: 640px;
+    margin: 24px auto;
+    padding: 16px;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-add-form label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.admin-add-form select,
+.admin-add-form input,
+.admin-add-form textarea {
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 8px;
+}

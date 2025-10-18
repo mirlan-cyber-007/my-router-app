@@ -1,37 +1,14 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import './index.css';
+import {getProducts} from './productsService';
 
 function ProductsPage() {
-  const products = [
-    {
-      id: 1,
-      name: 'Продукт 1',
-      description: 'Краткое описание продукта 1. Полезный, удобный и эффективный.',
-      image: '/images/abri.jpg',
-      price: '₽1 200'
-    },
-    {
-      id: 2,
-      name: 'Продукт 2',
-      description: 'Описание продукта 2. Решает задачи бизнеса и пользователей.',
-      image: 'images/oreh.jpg',
-      price: '₽2 500'
-    },
-    {
-      id: 3,
-      name: 'Продукт 3',
-      description: 'Описание продукта 3. Надёжный, простой в использовании.',
-      image: '/images/sliva.jpg',
-      price: '₽900'
-    },
-    {
-      id: 4,
-      name: 'Продукт 4',
-      description: 'Краткое описание продукта 1. Полезный, удобный и эффективный.',
-      image: '/images/abri.jpg',
-      price: '₽1 200'
-    }
-  ];
+  const [productsList, setProductsList] = useState([]);
+
+  useEffect(() => {
+    setProductsList(getProducts());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="products-page">
@@ -41,7 +18,7 @@ function ProductsPage() {
       </header>
 
       <section className="products-list">
-        {products.map(product => (
+        {productsList.map(product => (
           <div className="product-card" key={product.id}>
             <img src={product.image} alt={product.name} />
             <h3>{product.name}</h3>

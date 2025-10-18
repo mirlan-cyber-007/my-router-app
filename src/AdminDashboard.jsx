@@ -1,16 +1,17 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import productsData from "./Products.jsx";
+import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
+import {getProducts, deleteProduct} from "./productsService";
 
 export default function AdminDashboard() {
-  const [products, setProducts] = useState([]);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
-    setProducts(productsData);
+    setItems(getProducts());
   }, []);
 
   const handleDelete = (id) => {
-    setProducts(products.filter(p => p.id !== id));
+    deleteProduct(id);
+    setItems(getProducts());
   };
 
   return (
@@ -18,9 +19,9 @@ export default function AdminDashboard() {
       <h2>Панель администратора</h2>
       <Link to="/admin/add">Добавить товар</Link>
       <ul>
-        {products.map(p => (
+        {items.map(p => (
           <li key={p.id}>
-            {p.name} — ₽{p.price}
+            {p.name} — {p.price}
             <Link to={`/admin/edit/${p.id}`}> ✏️</Link>
             <button onClick={() => handleDelete(p.id)}>🗑️</button>
           </li>
