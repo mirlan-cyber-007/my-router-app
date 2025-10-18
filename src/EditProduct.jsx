@@ -6,21 +6,15 @@ import "./admin.css";
 const IMAGES = [
   "none",
   "abri.jpg",
-  "logo.jpeg",
-  "man.jpg",
   "oreh.jpg",
   "sliva.jpg",
-  "woman.jpg",
-  "woman1.jpg",
-  "woman2.jpg",
-  "woman3.jpg",
-  "woman4.jpg",
 ];
 
 export default function EditProduct() {
   const {id} = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
+  const [imageCustom, setImageCustom] = useState("");
 
   useEffect(() => {
     const p = getProducts().find(p => p.id === Number(id));
@@ -32,9 +26,10 @@ export default function EditProduct() {
   };
 
   const handleSave = () => {
+    const chosen = product.image === 'other' ? imageCustom : product.image;
     const payload = {
       ...product,
-      image: product.image && product.image.includes('/images/') ? product.image : (product.image && product.image !== 'none' ? `/images/${product.image}` : '')
+      image: chosen && chosen !== 'none' ? (chosen.includes('/images/') ? chosen : `/images/${chosen}`) : ''
     };
     updateProduct(payload);
     navigate("/admin/dashboard");
@@ -50,11 +45,19 @@ export default function EditProduct() {
       <label>Цена</label>
       <input name="price" value={product.price} onChange={handleChange} />
       <label>Картинка</label>
-      <select name="image" value={product.image && product.image.includes('/images/') ? product.image.split('/').pop() : (product.image || 'none')} onChange={handleChange}>
+      <select name="image" value={product.image && product.image.includes('/images/') ? product.image.split('/').pop() : (product.image || 'none')} onChange={(e) => {
+        // when selecting 'other' we keep product.image === 'other' so input appears
+        const v = e.target.value;
+        setProduct({...product, image: v});
+      }}>
         {IMAGES.map(img => (
           <option key={img} value={img}>{img}</option>
         ))}
+        <option value="other">Другая (ввести имя файла)</option>
       </select>
+      {product.image === 'other' && (
+        <input placeholder="example.jpg" value={imageCustom} onChange={e => setImageCustom(e.target.value)} />
+      )}
       <label>Описание</label>
       <textarea name="description" value={product.description} onChange={handleChange} />
       <div className="admin-actions">

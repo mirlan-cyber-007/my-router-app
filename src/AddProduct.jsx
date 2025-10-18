@@ -51,7 +51,11 @@ export default function AddProduct() {
         {IMAGES.map(img => (
           <option key={img} value={img}>{img}</option>
         ))}
+        <option value="other">Другая (ввести имя файла)</option>
       </select>
+      {newProduct.image === 'other' && (
+        <input name="imageCustom" placeholder="example.jpg" onChange={(e) => setNewProduct({...newProduct, image: e.target.value})} />
+      )}
       <label>Описание</label>
       <textarea name="description" placeholder="Описание" onChange={handleChange} />
       <div className="admin-actions">
