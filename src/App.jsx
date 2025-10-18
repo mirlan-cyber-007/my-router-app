@@ -44,6 +44,7 @@ function App() {
           <Link to="/products" className="nav-btn" onClick={closeMenu}>Продукты</Link>
           <Link to="/about" className="nav-btn" onClick={closeMenu}>О Нас</Link>
           <Link to="/contact" className="nav-btn" onClick={closeMenu}>Контакты</Link>
+          <Link to="/admin" className="nav-btn" onClick={closeMenu}>Админ</Link>
         </div>
       </nav>
 
