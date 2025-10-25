@@ -2,6 +2,8 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {addProduct} from "./productsService";
 import "./admin.css";
+import {getCategories} from "./categoriesService";
+import {useEffect} from "react";
 
 const IMAGES = [
   "none",
@@ -23,8 +25,15 @@ export default function AddProduct() {
     name: "",
     description: "",
     price: "",
-    image: ""
+    image: "",
+    category: "Орехи"
   });
+
+  const [cats, setCats] = useState([]);
+
+  useEffect(() => {
+    setCats(getCategories());
+  }, []);
 
   const handleChange = (e) => {
     setNewProduct({...newProduct, [e.target.name]: e.target.value});
@@ -44,6 +53,8 @@ export default function AddProduct() {
       <h2>Добавить товар</h2>
       <label>Название</label>
       <input name="name" placeholder="Название" onChange={handleChange} />
+      <label>Артикул (SKU)</label>
+      <input name="sku" placeholder="0001" onChange={handleChange} />
       <label>Цена</label>
       <input name="price" placeholder="Цена" onChange={handleChange} />
       <label>Картинка</label>
@@ -52,6 +63,10 @@ export default function AddProduct() {
           <option key={img} value={img}>{img}</option>
         ))}
         <option value="other">Другая (ввести имя файла)</option>
+      </select>
+      <label>Категория</label>
+      <select name="category" value={newProduct.category} onChange={handleChange}>
+        {cats.map(c => <option key={c}>{c}</option>)}
       </select>
       {newProduct.image === 'other' && (
         <input name="imageCustom" placeholder="example.jpg" onChange={(e) => setNewProduct({...newProduct, image: e.target.value})} />

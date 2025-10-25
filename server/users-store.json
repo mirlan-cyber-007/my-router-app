@@ -1,0 +1,9 @@
+[
+  {
+    "id": 1,
+    "email": "batkenbio@mail.ru",
+    "name": "mirlan",
+    "passwordHash": "$2b$10$coSXBrf67pJpee/C5XABOev0AtDCHokM8l8QCwcVWkm8d09m9eSz.",
+    "createdAt": "2025-10-19T15:51:21.235Z"
+  }
+]

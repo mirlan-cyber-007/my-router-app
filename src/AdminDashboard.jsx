@@ -15,18 +15,32 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div>
-      <h2>Панель администратора</h2>
-      <Link to="/admin/add">Добавить товар</Link>
-      <ul>
+    <div className="admin-dashboard container">
+      <div className="admin-header">
+        <h2>Панель администратора</h2>
+        <div style={{display: 'flex', gap: 8}}>
+          <Link to="/admin/add" className="admin-btn">Добавить товар</Link>
+          <Link to="/admin/categories" className="admin-btn" style={{background: '#6c757d'}}>Категории</Link>
+        </div>
+      </div>
+
+      <div className="admin-grid">
         {items.map(p => (
-          <li key={p.id}>
-            {p.name} — {p.price}
-            <Link to={`/admin/edit/${p.id}`}> ✏️</Link>
-            <button onClick={() => handleDelete(p.id)}>🗑️</button>
-          </li>
+          <div className="admin-card" key={p.id}>
+            <div className="admin-card-img">
+              {p.image ? <img src={p.image} alt={p.name} /> : <div className="no-img">No image</div>}
+            </div>
+            <div className="admin-card-body">
+              <h3 className="admin-card-title">{p.name} <small style={{color: '#666', marginLeft: 8}}>{p.sku}</small></h3>
+              <div className="admin-card-price">{p.price}</div>
+              <div className="admin-card-actions">
+                <Link to={`/admin/edit/${p.id}`} className="admin-action">✏️ Edit</Link>
+                <button className="admin-action danger" onClick={() => handleDelete(p.id)}>🗑️ Delete</button>
+              </div>
+            </div>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

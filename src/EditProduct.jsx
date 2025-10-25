@@ -15,6 +15,11 @@ export default function EditProduct() {
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [imageCustom, setImageCustom] = useState("");
+  const [cats, setCats] = useState([]);
+
+  useEffect(() => {
+    import('./categoriesService').then(m => setCats(m.getCategories()));
+  }, []);
 
   useEffect(() => {
     const p = getProducts().find(p => p.id === Number(id));
@@ -42,6 +47,8 @@ export default function EditProduct() {
       <h2>Редактировать: {product.name}</h2>
       <label>Название</label>
       <input name="name" value={product.name} onChange={handleChange} />
+      <label>Артикул (SKU)</label>
+      <input name="sku" value={product.sku || ''} onChange={handleChange} />
       <label>Цена</label>
       <input name="price" value={product.price} onChange={handleChange} />
       <label>Картинка</label>
@@ -54,6 +61,10 @@ export default function EditProduct() {
           <option key={img} value={img}>{img}</option>
         ))}
         <option value="other">Другая (ввести имя файла)</option>
+      </select>
+      <label>Категория</label>
+      <select name="category" value={product.category || (cats[0] || '')} onChange={handleChange}>
+        {cats.map(c => <option key={c}>{c}</option>)}
       </select>
       {product.image === 'other' && (
         <input placeholder="example.jpg" value={imageCustom} onChange={e => setImageCustom(e.target.value)} />
